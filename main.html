@@ -1,47 +1,59 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
 	<link rel="stylesheet" href="styles.css">
 </head>
-
-<body>	
+<body>
 	<script>
 		function secondHighest(arr) {
-			//Write your code here
-			let largest=arr[0];
-			let slargest=Integer.MIN_VALUE;
+			// Handle cases where the array is empty or has only one element
+			if (arr.length < 2) return Number.NEGATIVE_INFINITY;
 
-			for(let i=1;i<arr.length;i++){
-				if(arr[i]>largest){
-					slargest=largest;
-					largest=arr[i];
-				}
-				else if(arr[i]<largest && arr[i]>slargest){
-					slargest=arr[i];
+			let largest = Number.NEGATIVE_INFINITY;
+			let slargest = Number.NEGATIVE_INFINITY;
+
+			for (let i = 0; i < arr.length; i++) {
+				// Skip non-numeric values
+				if (typeof arr[i] !== "number") continue;
+
+				if (arr[i] > largest) {
+					slargest = largest;
+					largest = arr[i];
+				} else if (arr[i] > slargest && arr[i] < largest) {
+					slargest = arr[i];
 				}
 			}
-			return slargest;
 
-			
-			
+			// Return second largest if it exists, otherwise -Infinity
+			return slargest === Number.NEGATIVE_INFINITY ? Number.NEGATIVE_INFINITY : slargest;
 		}
 
 		function Main() {
-			var n = prompt("Enter the number of elements");
-			var arr = [];
-			for (var i = 0; i < n; i++) {
-				arr[i] = prompt("Enter element " + (i+1));
+			let n = parseInt(prompt("Enter the number of elements"), 10);
+			if (isNaN(n) || n <= 0) {
+				alert("Invalid input. Please enter a positive integer.");
+				return;
 			}
+
+			let arr = [];
+			for (let i = 0; i < n; i++) {
+				let input = prompt(`Enter element ${i + 1}`);
+				let number = parseFloat(input);
+				if (!isNaN(number)) {
+					arr.push(number);
+				} else {
+					alert("Invalid input. Please enter a valid number.");
+					i--; // Ask for the same index again
+				}
+			}
+
 			alert(secondHighest(arr));
 		}
-		Main();
+
+		// Uncomment this to run the function in a browser
+		// Main();
 	</script>
 
-    <script type="text/javascript" src="./script.js">
-</script>
-
+	<script type="text/javascript" src="./script.js"></script>
 </body>
-
 </html>
