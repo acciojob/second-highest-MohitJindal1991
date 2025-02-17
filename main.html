@@ -14,7 +14,6 @@
 
 			for (let i = 0; i < arr.length; i++) {
 				// Skip non-numeric values
-				if (typeof arr[i] !== "number") continue;
 
 				if (arr[i] > largest) {
 					slargest = largest;
@@ -25,7 +24,7 @@
 			}
 
 			// Return second largest if it exists, otherwise -Infinity
-			return slargest === Number.NEGATIVE_INFINITY ? Number.NEGATIVE_INFINITY : slargest;
+			return slargest;
 		}
 
 		function Main() {
